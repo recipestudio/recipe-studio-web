@@ -3,3 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  each r, idx in recipes
+    div.recipe
+      a(href='/recipes/'+r._id)  
+        h3= r.name
+      p= r.author
+      

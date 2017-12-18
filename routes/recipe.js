@@ -7,7 +7,7 @@ var APIurl = 'http://api.recipe.studio/';
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-    res.status(404);
+    // something later
 });
 
 // POST new recipe
