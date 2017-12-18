@@ -2,12 +2,12 @@ extends layout
 
 block content
     h1= recipe.name
-    h3= recipe.author + ' on ' + recipe.created
+    h3= recipe.author.displayName + ' on ' + recipe.created
 
     h3 Ingredients:
     ul
         each i, index in recipe.ingredients
-            li= i.quantity + ' ' + i.units + ' of ' + i.ingredient
+            li= i.quantity + ' ' + i.units + ' of ' + i.data.name
 
     h3 Directions:
     p= recipe.directions

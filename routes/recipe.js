@@ -27,7 +27,8 @@ router.get('/:id', (req, res, next) => {
     fetch(query)
         .then( (res) => { return res.json(); })
         .then( (data) => { 
-            res.render( 'recipe', {recipe: data.data} ); 
+            console.log(data);
+            res.render( 'recipe', {recipe: data} ); 
         });
 });
 
