@@ -1,7 +1,14 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Recipe Studio
+    include modules
+
   body
-    block content
+    include header
+
+    main
+      div.container
+        block content
+
+    include footer
