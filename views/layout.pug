@@ -1,7 +1,15 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Recipe Studio
+    include components/modules
+
   body
-    block content
+    include components/header
+
+    block content        
+
+    include components/footer
+
+    include modals/new-recipe-modal.pug
+    //include modals/edit-recipe-modal.pug

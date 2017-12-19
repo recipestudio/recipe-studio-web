@@ -1,0 +1,37 @@
+.modal(id="edit-recipe")
+    .modal-content
+        .row
+            .col.s12
+                h4 New Recipe
+                p Fill out the form below to create your recipe.
+        .row
+            .col.s12
+                form(action="/recipe/new")
+                    .row
+                        .input-field.col.s12
+                            input.validate(type="text", id="name")
+                            label(for="name") Recipe Name
+                    .row
+                        .input-field.col.s12
+                            textarea.materialize-textarea(id="description")
+                            label(for="description") Descriptions...
+                    .row
+                        .col.s12
+                            ul.ingredients-container
+                    .row
+                        .input-field.col.s12.m4
+                            input.autocomplete(type="text", id="ingredients-selector")
+                            label(for="ingredients-selector") Ingredient
+                        .input-field.col.s12.m4
+                            input.validate(type="text", id="ingredient-quantity")
+                            label(for="ingredient-quantity") Amount
+                        .input-field.col.s12.m4
+                            input.validate(type="text", id="ingredients-units")
+                            label(for="ingredients-units") Units
+                    .row
+                        .input-field.col.s12
+                            textarea.materialize-textarea(id="directions")
+                            label(for="directions") Directions...
+    .modal-footer
+        a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href="#", id="new-save") Save
+        a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href="#") Cancel

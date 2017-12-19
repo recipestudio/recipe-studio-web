@@ -1,12 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-
-  each r, idx in recipes
-    div.recipe
-      a(href='/recipes/'+r._id)  
-        h3= r.name
-      p= r.author
+  main
+    div.container
+      each r, idx in recipes
+        div.row
+          div.col.s12
+            a(href='/recipes/'+r._id)  
+              h3= r.name
+            p= r.author.displayName
       
+  .fixed-action-btn
+    a.btn-floating.btn-large.red.modal-trigger(id="new-recipe-btn", href="#new-recipe")
+      i.large.material-icons add

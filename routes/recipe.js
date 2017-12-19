@@ -2,18 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var fetch = require('node-fetch');
-
 var APIurl = 'http://api.recipe.studio/';
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
     // something later
-});
-
-// POST new recipe
-router.post('/new', (req, res, next) => {
-    // create new recipe using api.recipe.studio
-
 });
 
 // GET recipe page
@@ -27,7 +20,8 @@ router.get('/:id', (req, res, next) => {
     fetch(query)
         .then( (res) => { return res.json(); })
         .then( (data) => { 
-            res.render( 'recipe', {recipe: data.data} ); 
+            console.log(data);
+            res.render( 'recipe', {recipe: data} ); 
         });
 });
 
