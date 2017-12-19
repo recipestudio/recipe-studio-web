@@ -2,18 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var fetch = require('node-fetch');
-
 var APIurl = 'http://api.recipe.studio/';
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
     // something later
-});
-
-// POST new recipe
-router.post('/new', (req, res, next) => {
-    // create new recipe using api.recipe.studio
-
 });
 
 // GET recipe page

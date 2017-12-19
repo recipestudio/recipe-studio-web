@@ -2,13 +2,14 @@ doctype html
 html
   head
     title Recipe Studio
-    include modules
+    include components/modules
 
   body
-    include header
+    include components/header
 
-    main
-      div.container
-        block content
+    block content        
 
-    include footer
+    include components/footer
+
+    include modals/new-recipe-modal.pug
+    //include modals/edit-recipe-modal.pug

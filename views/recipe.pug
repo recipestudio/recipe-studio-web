@@ -1,13 +1,19 @@
 extends layout
 
 block content
-    h1= recipe.name
-    h3= recipe.author.displayName + ' on ' + recipe.created
 
-    h3 Ingredients:
-    ul
-        each i, index in recipe.ingredients
-            li= i.quantity + ' ' + i.units + ' of ' + i.data.name
+    main
+        div.container
+            h1= recipe.name
+            h3= recipe.author.displayName + ' on ' + recipe.created
 
-    h3 Directions:
-    p= recipe.directions
+            h3 Ingredients:
+            ul
+                each i, index in recipe.ingredients
+                    li= i.quantity + ' ' + i.units + ' of ' + i.data.name
+
+            h3 Directions:
+            p= recipe.directions
+
+    include modals/new-recipe-modal
+    include modals/edit-recipe-modal

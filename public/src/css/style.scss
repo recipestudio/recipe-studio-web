@@ -1,0 +1,41 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+form {
+  a.modal-close {
+    margin: 4px;
+  }
+
+  a.btn-floating {
+    position: relative;
+    top: 16px;
+  }
+}
+
+#new-recipe-btn {
+  bottom: 44px;
+}
+
+footer {
+  padding: 12px;
+
+  a {
+    color: white;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

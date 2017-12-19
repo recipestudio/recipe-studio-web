@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('styles', function(){
-  gulp.src(['node_modules/materialize-css/dist/css/materialize.css', 'public/src/styles/*css'])
+  gulp.src(['node_modules/materialize-css/dist/css/materialize.css', 'public/src/css/*css'])
     .pipe(sourcemaps.init())
       .pipe(concat('bundle.css'))
       .pipe(sass())
@@ -22,7 +22,7 @@ gulp.task('styles', function(){
 });
 
 gulp.task('scripts', function(){
-  return gulp.src(['node_modules/jquery/dist/jquery.slim.min.js', 'node_modules/materialize-css/dist/js/materialize.min.js', 'public/src/scripts/*.js'])
+  return gulp.src(['node_modules/jquery/dist/jquery.slim.js', 'node_modules/materialize-css/dist/js/materialize.js', 'public/src/js/*.js'])
     /* .pipe(jshint())
     .pipe(jshint.reporter('default')) */
     .pipe(sourcemaps.init())
@@ -49,7 +49,7 @@ gulp.task('server', function() {
 });
 
 gulp.task('default', ['scripts', 'styles', 'server'], function() {
-  gulp.watch('public/src/styles/**/*css', ['styles']);
-  gulp.watch('public/src/scripts/**/*.js', ['scripts']);
+  gulp.watch('public/src/css/**/*css', ['styles']);
+  gulp.watch('public/src/js/**/*.js', ['scripts']);
   gulp.watch(['app.js', 'routes/**/*.js'], ['server']);
 });
