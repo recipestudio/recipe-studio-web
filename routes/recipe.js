@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var fetch = require('node-fetch');
-var APIurl = 'http://api.recipe.studio/';
-
 /* GET home page. */
 router.get('/', (req, res, next) => {
     // something later
@@ -11,18 +8,9 @@ router.get('/', (req, res, next) => {
 
 // GET recipe page
 router.get('/:id', (req, res, next) => {
-
-    // load recipe from api.recipe.studio and render page with data
+    // render page for recipe by :id
     let rid = req.params.id;
-    let query = APIurl + 'recipe/' + rid;
-    console.log('fetching '+query);
-
-    fetch(query)
-        .then( (res) => { return res.json(); })
-        .then( (data) => { 
-            console.log(data);
-            res.render( 'recipe', {recipe: data} ); 
-        });
+    res.render( 'recipe', {recipeid: rid} );
 });
 
 module.exports = router;

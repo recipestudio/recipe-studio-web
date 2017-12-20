@@ -3,17 +3,18 @@ extends layout
 block content
 
     main
-        div.container
-            h1= recipe.name
-            h3= recipe.author.displayName + ' on ' + recipe.created
+        div.container(style="display:none")
+            h3.recipe-name
+            p.recipe-author
+            p.recipe-date
 
-            h3 Ingredients:
-            ul
-                each i, index in recipe.ingredients
-                    li= i.quantity + ' ' + i.units + ' of ' + i.data.name
+            h4 Ingredients:
+            ul.recipe-ingredients
 
-            h3 Directions:
-            p= recipe.directions
+            h4 Directions:
+            p.recipe-directions
+
+    .recipe-id(data-recipe-id= recipeid)
+    script(src='/src/js/recipe.js')
 
     include modals/new-recipe-modal
-    include modals/edit-recipe-modal

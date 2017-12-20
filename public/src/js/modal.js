@@ -1,7 +1,3 @@
-const APIurl = 'http://api.recipe.studio/';
-
-var ingredients = {};
-
 function buildAutocompleteData() {
     let ingredientsAutocomplete = {};
 

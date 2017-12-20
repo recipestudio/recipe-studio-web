@@ -2,11 +2,35 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+
+  #new-recipe-btn {
+    bottom: 44px;
+  }
 }
 
 main {
   flex: 1 0 auto;
+  padding-top: 12px;
+
   a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+nav {
+  .sidenav-trigger {
+    cursor: pointer;
+  }
+}
+
+footer {
+  padding: 12px;
+
+  a {
+    color: white;
+
     &:hover {
       text-decoration: underline;
     }
@@ -24,18 +48,28 @@ form {
   }
 }
 
-#new-recipe-btn {
-  bottom: 44px;
+.preloader-wrapper {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
-footer {
-  padding: 12px;
+.card {
+  margin-left: 4px;
+  margin-right: 4px;
+  .card-image-overflow {
+    overflow: hidden;
+    height: 250px;
+    margin: 0;
 
-  a {
-    color: white;
-
-    &:hover {
-      text-decoration: underline;
+    img {
+      width: 100%;
+      margin-top: -25%;
     }
   }
+}
+
+.signout-btn, .account-btn {
+  display: none;
 }

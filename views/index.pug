@@ -2,14 +2,13 @@ extends layout
 
 block content
   main
-    div.container
-      each r, idx in recipes
-        div.row
-          div.col.s12
-            a(href='/recipes/'+r._id)  
-              h3= r.name
-            p= r.author.displayName
+    .container
+      .row
+        .col.s12.m10.offset-m1.l12.offset-l0
+          .row.recipe-container(style="display:none")
       
   .fixed-action-btn
     a.btn-floating.btn-large.red.modal-trigger(id="new-recipe-btn", href="#new-recipe")
       i.large.material-icons add
+  
+  script(src="/src/js/index.js")
