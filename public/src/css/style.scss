@@ -3,8 +3,9 @@ body {
   min-height: 100vh;
   flex-direction: column;
 
-  #new-recipe-btn {
+  #new-recipe-btn, #edit-recipe-btn {
     bottom: 44px;
+    display: none;
   }
 }
 
@@ -15,6 +16,10 @@ main {
   a {
     &:hover {
       text-decoration: underline;
+
+      &.btn {
+        text-decoration: none;
+      }
     }
   }
 }
@@ -51,8 +56,9 @@ form {
 .preloader-wrapper {
   display: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+  z-index: 999;
 }
 
 .card {
@@ -65,7 +71,7 @@ form {
 
     img {
       width: 100%;
-      margin-top: -25%;
+      //margin-top: -25%;
     }
   }
 }

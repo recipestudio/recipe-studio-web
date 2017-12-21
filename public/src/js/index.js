@@ -1,12 +1,11 @@
-
+// make AJAX request to API for recipes and add to page
 function getRecipes() {
-
     showPreload();
 
     $.getJSON(APIurl + 'recipe/all')
     .then((recipes) => {
 
-        console.log(recipes);
+        // build recipes and append to page
         recipes.forEach((recipe) => {
 
             // put cards here
@@ -74,11 +73,8 @@ function getRecipes() {
         hidePreload();
         $('.recipe-container').show();
     });
-
 }
 
 $(document).ready(() => {
-    
     getRecipes();
-
 });

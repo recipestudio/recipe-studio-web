@@ -13,8 +13,13 @@ block content
 
             h4 Directions:
             p.recipe-directions
+    
+    .fixed-action-btn
+        a.btn-floating.btn-large.red.modal-trigger(id="edit-recipe-btn", href="#edit-recipe")
+            i.large.material-icons edit
 
+    include modals/edit-recipe-modal
+
+    .recipe-author-id(data-author-id="")
     .recipe-id(data-recipe-id= recipeid)
     script(src='/src/js/recipe.js')
-
-    include modals/new-recipe-modal

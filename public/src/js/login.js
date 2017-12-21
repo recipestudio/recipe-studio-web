@@ -8,6 +8,7 @@ const firebase_config = {
     messagingSenderId: "925652181315"
 }; firebase.initializeApp(firebase_config);
 
+var isLoggedIn = false;
 
 // log in user
 function login(email, password) {
@@ -40,7 +41,7 @@ function logout() {
 }
 
 // update UI when user logs in/out
-function updateUserDetailsUI([isLoggedIn, user]) {
+function updateUserDetailsUI(user) {
     if (isLoggedIn) {
         // Update greeting text
         $('.user-greeting .username').text(user.displayName);
@@ -50,6 +51,10 @@ function updateUserDetailsUI([isLoggedIn, user]) {
         $('.signin-btn').hide();
         $('.account-btn').show();
         $('.signout-btn').show();
+
+        // new recipe btn
+        $('#new-recipe-btn').show();
+
     } else {
         // Hide greeting text
         $('.user-greeting').hide();
@@ -58,14 +63,22 @@ function updateUserDetailsUI([isLoggedIn, user]) {
         $('.signin-btn').show();
         $('.account-btn').hide();
         $('.signout-btn').hide();
+
+        // new/edit recipe-btn
+        $('#new-recipe-btn').hide();
+        $('#edit-recipe-btn').hide();
     }
 }
 
 $(document).ready(() => {
     // listen for authentication changes
     firebase.auth().onAuthStateChanged((user) => {
-        updateUserDetailsUI( (user ? [true, user] : [false, null]) );
+        isLoggedIn = (user ? true : false);
+        updateUserDetailsUI( isLoggedIn ? user : null );
     });
+
+    // check authentication and initialize account UI 
+    updateUserDetailsUI(isLoggedIn ? firebase.auth().user : null);
 
     let loginFormBtn = $('.login-form-btn');
     if (loginFormBtn.length > 0) {
