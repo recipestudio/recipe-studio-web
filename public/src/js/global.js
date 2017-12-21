@@ -8,9 +8,9 @@ $(document).ready(() => {
     // init components
     $('.sidenav').sidenav();
 
-    $('#new-recipe-btn, #edit-recipe-btn').floatingActionButton({
+    $('#new-recipe-btn, #edit-recipe-btn').parent().floatingActionButton({
         direction: 'top',
-        hoverEnabled: false,
+        hoverEnabled: true,
         toolbarEnabled: false
     });
 });
