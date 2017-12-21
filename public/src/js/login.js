@@ -60,9 +60,10 @@ function updateUserDetailsUI(user) {
     $(".signin-btn").hide();
     $(".account-btn").show();
     $(".signout-btn").show();
-
     // new recipe btn
-    $("#new-recipe-btn").show();
+    $("#new-recipe-btn")
+      .parent()
+      .show();
   } else {
     // Hide greeting text
     $(".user-greeting").hide();
@@ -73,8 +74,12 @@ function updateUserDetailsUI(user) {
     $(".signout-btn").hide();
 
     // new/edit recipe-btn
-    $("#new-recipe-btn").hide();
-    $("#edit-recipe-btn").hide();
+    $("#new-recipe-btn")
+      .parent()
+      .hide();
+    $("#edit-recipe-btn")
+      .parent()
+      .hide();
   }
 }
 

@@ -12,9 +12,11 @@ $(document).ready(() => {
   // init components
   $(".sidenav").sidenav();
 
-  $("#new-recipe-btn, #edit-recipe-btn").floatingActionButton({
-    direction: "top",
-    hoverEnabled: false,
-    toolbarEnabled: false
-  });
+  $("#new-recipe-btn, #edit-recipe-btn")
+    .parent()
+    .floatingActionButton({
+      direction: "top",
+      hoverEnabled: true,
+      toolbarEnabled: false
+    });
 });

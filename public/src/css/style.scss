@@ -3,7 +3,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
 
-  #new-recipe-btn, #edit-recipe-btn {
+  .fixed-action-btn {
     bottom: 44px;
     display: none;
   }
@@ -84,7 +84,12 @@ form {
   font-weight: bold;
 }
 
-@media only screen and (min-width: 601px) {
+.recipe-image {
+  max-width: 100%;
+  margin-top: 1.9466666667rem;
+}
+
+/* @media only screen and (min-width: 601px) {
   .recipe-image {
     max-width: 50%;
     float: right;
@@ -97,7 +102,7 @@ form {
     max-width: 100%;
     float: none;
   }
-}
+} */
 
 .signout-btn, .account-btn {
   display: none;
