@@ -1,4 +1,4 @@
-const APIurl = 'http://api.recipe.studio/';
+const APIurl = 'https://api.recipe.studio/';
 const ingredients = {};
 
 function showPreload() { $('.preloader-wrapper').show(); }
