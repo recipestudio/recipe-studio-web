@@ -49,11 +49,15 @@ function loadRecipe(rid) {
       if (isLoggedIn) {
         let authorId = $(".recipe-author-id").data("author-id");
         let userId = firebase.auth().currentUser.uid;
-
+        console.log(userId, authorId);
         if (userId == authorId) {
-          $("#edit-recipe-btn").show();
+          $("#edit-recipe-btn")
+            .parent()
+            .show();
         } else {
-          $("#edit-recipe-btn").hide();
+          $("#edit-recipe-btn")
+            .parent()
+            .hide();
         }
       }
     });
