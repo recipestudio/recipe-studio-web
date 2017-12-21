@@ -53,13 +53,17 @@ function logout() {
 function updateUserDetailsUI(user) {
   if (isLoggedIn) {
     // Update greeting text
-    $(".user-greeting .username").text(user.displayName);
-    $(".user-greeting").show();
+    /* $(".user-greeting .username").text(user.displayName);
+    $(".user-greeting").show(); */
 
     // login/out button
     $(".signin-btn").hide();
-    $(".account-btn").show();
     $(".signout-btn").show();
+    $(".account-btn")
+      .show()
+      .children()
+      .attr("href", "/user/" + user.uid + "/settings");
+
     // new recipe btn
     $("#new-recipe-btn")
       .parent()
@@ -70,8 +74,11 @@ function updateUserDetailsUI(user) {
 
     // login/out button
     $(".signin-btn").show();
-    $(".account-btn").hide();
     $(".signout-btn").hide();
+    $(".account-btn")
+      .hide()
+      .children()
+      .attr("href", "/");
 
     // new/edit recipe-btn
     $("#new-recipe-btn")
