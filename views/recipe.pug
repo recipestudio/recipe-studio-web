@@ -1,17 +1,25 @@
 extends layout
 
 block content
-
     main
-        div.container(style="display:none")
+        .container(style="display:none")
+            img.recipe-image
             h3.recipe-name
-            p.recipe-author
-            p.recipe-date
+            div
+                | Recipe by 
+                a.recipe-author-link
+                    span.recipe-author
+                br
+                | Created on 
+                span.recipe-date
 
-            h4 Ingredients:
-            ul.recipe-ingredients
+            h4 Summary
+            p.recipe-description
 
-            h4 Directions:
+            h4 Ingredients
+            ul.browser-default.recipe-ingredients
+
+            h4 Directions
             p.recipe-directions
     
     .fixed-action-btn

@@ -6,18 +6,22 @@ function loadRecipe(rid) {
         let recipe = data;
 
         // build recipe details
+        $('.recipe-image').attr('src', (recipe.image || 'http://via.placeholder.com/400x400'));
         $('.recipe-name').text(recipe.name);
         $('.recipe-author').text(recipe.author.displayName);
         $('.recipe-author-id').attr('data-author-id', recipe.author.uid);
+        $('.recipe-author-link').attr('href', '/user/' + recipe.author.uid);
+        $('.recipe-description').text(recipe.description);
         $('.recipe-directions').text(recipe.directions);
 
         let d = new Date( recipe.created );
-        $('.recipe-date').text( d.toGMTString() );
+        let d_string = d.toLocaleString('en-us', { month: 'long', day: 'numeric', year: 'numeric' });
+        $('.recipe-date').text( d_string );
 
         let ingredientContainer = $('.recipe-ingredients');
         recipe.ingredients.forEach((ingredient) => {
             let newLi = $('<li></li>')
-            .text(ingredient.data.name + 
+            .html('<b>' + ingredient.data.name + '</b>' +
                 ', ' + ingredient.quantity + 
                 ' ' + ingredient.units)
             .appendTo(ingredientContainer);
