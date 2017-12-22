@@ -3,13 +3,20 @@ extends ../layout
 block content
     main
         .container(style="display:none")
-            h3 User Profile
-            h4
-                span.user-name
-                | 's Recipes
+            .row
+                .col.s12
+                    h3 User Profile
+                    
+            .row
+                .col.s12
+                    h4
+                        span.user-name
+                        | 's Recipes
 
-            .recipe-container
+            .row
+                .col.s12.m10.offset-m1.l12.offset-l0
+                    .row.recipe-container(style="display:none")
     
     .user-id(data-user-id= userId)
 
-    script(src='/src/js/user-profile.js')
+    script(src="src/js/user-profile.js")
