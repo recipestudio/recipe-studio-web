@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
     main
@@ -34,7 +34,7 @@ block content
                 a.btn-floating.red(id="delete-recipe-btn")
                     i.material-icons delete
 
-    include modals/edit-recipe-modal
+    //include modals/edit-recipe-modal
 
     .recipe-author-id(data-author-id="")
     .recipe-id(data-recipe-id= recipeid)
