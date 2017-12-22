@@ -4,6 +4,13 @@ function loadUserDetails(userId) {
     // load user details
     .then(user => {
       $(".user-name").text(user.displayName);
+      let d = new Date(user.metadata.creationTime);
+      let d_string = d.toLocaleString("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+      });
+      $(".user-created").text(d_string);
     })
     // load recipes
     .then(() => {
@@ -13,16 +20,26 @@ function loadUserDetails(userId) {
     .then(() => {
       hidePreload();
       $(".container").show();
+    })
+    .catch(err => {
+      console.error(err);
     });
 }
 
 function loadUserRecipes(userId) {
-  $.getJSON(APIurl + "recipe/all?user=" + userId).then(recipes => {
-    // build recipes and append to page
-    recipes.forEach(recipe => {
-      buildRecipeCard(recipe, ".recipe-container");
+  $.getJSON(APIurl + "recipe/all?user=" + userId)
+    .then(recipes => {
+      // build recipes and append to page
+      recipes.forEach(recipe => {
+        buildRecipeCard(recipe, ".recipe-container");
+      });
+
+      hidePreload();
+      $(".recipe-container").show();
+    })
+    .catch(err => {
+      console.error(err);
     });
-  });
 }
 
 $(document).ready(() => {
