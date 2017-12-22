@@ -2,15 +2,14 @@ extends ../layout
 
 block content
     main
-        .container
+        .container(style="display:none")
             h3 User Profile
-            p= userId
-
             h4
                 span.user-name
                 | 's Recipes
 
             .recipe-container
+    
+    .user-id(data-user-id= userId)
 
-
-    script(src='/src/js/profile.js')
+    script(src='/src/js/user-profile.js')

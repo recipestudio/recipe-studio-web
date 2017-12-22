@@ -1,4 +1,4 @@
-const APIurl = "https://api.recipe.studio/";
+const APIurl = "http://localhost:5000/";
 const ingredients = {};
 
 function showPreload() {
