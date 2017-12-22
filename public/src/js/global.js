@@ -76,6 +76,7 @@ function buildRecipeCard(recipe, container) {
 $(document).ready(() => {
   // init components
   $(".sidenav").sidenav();
+  //$(".materialboxed").materialbox();
 
   $("#new-recipe-btn, #edit-recipe-btn")
     .parent()

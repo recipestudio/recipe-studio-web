@@ -44,6 +44,26 @@ block content
                                 textarea.materialize-textarea(id="directions")
                                 label(for="directions") Directions
                         .row
+                            .col.s12.center.recipe-image-uploader
+                                .row
+                                    .col.s12
+                                        .file.progress(style="display:none")
+                                            .indeterminate
+                                .row
+                                    .col.s12.l8.file-field.input-field
+                                        .btn
+                                            span Choose Image
+                                            input(type="file", id="image")
+                                        .file-path-wrapper
+                                            input.file-path.validate(type="input")
+
+                                    .col.s12.l4
+                                        .btn
+                                            span(id="upload") Upload
+                            .col.s12.center.recipe-image
+                                img(src="")
+
+                        .row
                             .col.s12.center-align
                                 a.waves-effect.waves-light.btn(id="new-recipe-save") Save
                                 a.waves-effect.waves-light.btn Cancel

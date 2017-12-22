@@ -51,6 +51,20 @@ form {
     position: relative;
     top: 16px;
   }
+
+  .file-field .btn {
+    float: none;
+  }
+
+  .file.progress {
+    display: none;
+    margin-top: 12px;
+  }
+
+  .recipe-image {
+    display: none;
+    max-width: 100%;
+  }
 }
 
 .preloader-wrapper {
@@ -84,26 +98,12 @@ form {
   font-weight: bold;
 }
 
-.recipe-image {
+.recipe-image:not(.active) {
   max-width: 100%;
   margin-top: 1.9466666667rem;
 }
 
-/* @media only screen and (min-width: 601px) {
-  .recipe-image {
-    max-width: 50%;
-    float: right;
-    margin-left: 24px;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .recipe-image {
-    max-width: 100%;
-    float: none;
-  }
-} */
-
-.signout-btn, .account-btn {
+.signout-btn,
+.account-btn {
   display: none;
 }

@@ -27,6 +27,43 @@ function buildIngredientAutocompleteData() {
   });
 }
 
+// image uploading function
+function uploadImage(img) {
+  console.log("starting upload");
+
+  let requestData = new FormData();
+  requestData.append("image", img);
+  requestData.append("type", "file");
+
+  // show preloader
+  $(".file.progress").show();
+
+  $.ajax({
+    url: "https://api.imgur.com/3/image",
+    type: "POST",
+    data: requestData,
+    contentType: false,
+    processData: false,
+    headers: {
+      Authorization: "Client-ID eaefba0e049bc17"
+    }
+  })
+    .then(result => {
+      console.log(
+        "Image uploaded: http://i.imgur.com/" + result.data.id + ".png"
+      );
+
+      // hide preloader
+      $(".file.progress").hide();
+      $(".recipe-image-uploader").hide();
+
+      let recipeImage = "http://i.imgur.com/" + result.data.id + ".png";
+      $(".recipe-image img").attr("src", recipeImage);
+      $(".recipe-image").show();
+    })
+    .catch(err => console.error(err));
+}
+
 // add ingredient to recipe
 function addIngredient() {
   // get ingredient properties
@@ -125,6 +162,18 @@ $(document).ready(() => {
 
   // save recipe handler
   $("#new-recipe-save").click(saveNewRecipe);
+
+  // upload image handler
+  $("#upload").click(() => {
+    // check if file is uploaded
+    let filesUploaded = $("#image").prop("files");
+    if (filesUploaded.length > 0) {
+      uploadImage(filesUploaded[0]);
+    } else {
+      console.error("no files chosen");
+      swal("No file was selected!");
+    }
+  });
 
   // build ingredient autocomplete
   buildIngredientAutocompleteData();
