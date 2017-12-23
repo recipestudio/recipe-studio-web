@@ -43,13 +43,16 @@ footer {
 }
 
 form {
-  a.modal-close {
-    margin: 4px;
-  }
+  a {
+    &.btn-floating {
+      position: relative;
+      top: 16px;
+      cursor: pointer;
+    }
 
-  a.btn-floating {
-    position: relative;
-    top: 16px;
+    &.btn {
+      cursor: pointer;
+    }
   }
 
   .file-field .btn {
