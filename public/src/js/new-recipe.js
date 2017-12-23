@@ -49,15 +49,11 @@ function uploadImage(img) {
     }
   })
     .then(result => {
-      console.log(
-        "Image uploaded: http://i.imgur.com/" + result.data.id + ".png"
-      );
-
       // hide preloader
       $(".file.progress").hide();
       $(".recipe-image-uploader").hide();
 
-      let recipeImage = "http://i.imgur.com/" + result.data.id + ".png";
+      let recipeImage = "https://i.imgur.com/" + result.data.id + ".png";
       $(".recipe-image img").attr("src", recipeImage);
       $(".recipe-image").show();
     })
@@ -73,7 +69,6 @@ function addIngredient() {
     iunits = $("#ingredient-units").val();
 
   if (iid == "" || !iid) {
-    console.info("we'll create a new ingredient here.");
     // create new ingredient
     $.ajax({
       url: APIurl + "ingredient/new",
@@ -162,8 +157,6 @@ function saveNewRecipe() {
     image: recipe_image
   };
 
-  console.log("sending data: ", recipe_obj);
-
   $.ajax({
     type: "POST",
     url: APIurl + "recipe/new",
@@ -200,7 +193,6 @@ $(document).ready(() => {
 function handleSaveSuccess(result) {
   let rid = result._id;
   redirect("/recipes/" + rid);
-  console.info(result);
 }
 
 function handleSaveError(result) {
