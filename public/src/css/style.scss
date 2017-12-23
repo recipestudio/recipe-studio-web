@@ -65,6 +65,15 @@ form {
     display: none;
     max-width: 100%;
   }
+
+  #new-recipe-save {
+    margin-right: 4px;
+  }
+
+  .recipe-btn {
+    width: 128px;
+    text-align: center;
+  }
 }
 
 .preloader-wrapper {

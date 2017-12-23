@@ -29,10 +29,18 @@ function buildRecipeCard(recipe, container) {
     .addClass("card-title activator grey-text text-darken-4")
     .html(recipe.name + '<i class="material-icons right">more_vert</i>');
 
+  let recipeAuthor = $("<p></p>").html(
+      "<i>By " + recipe.author.displayName + "</i>"
+    ),
+    recipeAuthor2 = $("<p></p>").html(
+      "<i>By " + recipe.author.displayName + "</i>"
+    );
+
   // completed card content
   let recipeContent = $("<div></div>")
     .addClass("card-content")
-    .append(recipeTitle);
+    .append(recipeTitle)
+    .append(recipeAuthor);
 
   // card action
   let recipeLink = $("<div></div>")
@@ -54,6 +62,7 @@ function buildRecipeCard(recipe, container) {
         .addClass("card-title activator grey-text text-darken-4")
         .html(recipe.name + '<i class="material-icons right">close</i>')
     )
+    .append(recipeAuthor2)
     .append(recipeSummary);
 
   // completed card

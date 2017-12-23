@@ -5,7 +5,7 @@ block content
         .container
             .row
                 .col.s12.center-align
-                    h4 New Recipe
+                    h3.header New Recipe
                     p Fill out the form below to create your recipe.
             .row
                 .col.s12.m8.offset-m2
@@ -50,22 +50,25 @@ block content
                                         .file.progress(style="display:none")
                                             .indeterminate
                                 .row
-                                    .col.s12.l8.file-field.input-field
-                                        .btn
-                                            span Choose Image
-                                            input(type="file", id="image")
-                                        .file-path-wrapper
-                                            input.file-path.validate(type="input")
+                                    .col.s11.file-field.input-field
+                                        .row
+                                            .col.s4
+                                                .btn
+                                                    span Image
+                                                    input(type="file", id="image")
+                                            .col.s8
+                                                    .file-path-wrapper
+                                                        input.file-path.validate(type="text")
 
-                                    .col.s12.l4
-                                        .btn
-                                            span(id="upload") Upload
+                                    .col.s1
+                                        a.btn-floating(id="upload")
+                                            i.material-icons file_upload
                             .col.s12.center.recipe-image
                                 img(src="")
 
                         .row
                             .col.s12.center-align
-                                a.waves-effect.waves-light.btn(id="new-recipe-save") Save
-                                a.waves-effect.waves-light.btn Cancel
+                                a.waves-effect.waves-light.btn.recipe-btn(id="new-recipe-save") Save
+                                a.waves-effect.waves-light.btn.recipe-btn Cancel
 
     script(src="/src/js/new-recipe.js")
