@@ -198,6 +198,8 @@ $(document).ready(() => {
 });
 
 function handleSaveSuccess(result) {
+  let rid = result._id;
+  redirect("/recipes/" + rid);
   console.info(result);
 }
 

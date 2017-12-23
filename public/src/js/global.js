@@ -73,6 +73,16 @@ function buildRecipeCard(recipe, container) {
     .appendTo(recipeContainer);
 }
 
+// redirect the UI to 'path'
+function redirect(path) {
+  window.setTimeout(() => {
+    showPreload();
+    window.setTimeout(() => {
+      window.location = path;
+    }, 1000);
+  }, 1000);
+}
+
 $(document).ready(() => {
   // init components
   $(".sidenav").sidenav();
