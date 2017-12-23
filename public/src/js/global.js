@@ -29,17 +29,25 @@ function buildRecipeCard(recipe, container) {
     .addClass("card-title activator grey-text text-darken-4")
     .html(recipe.name + '<i class="material-icons right">more_vert</i>');
 
+  let recipeAuthor = $("<p></p>").html(
+      "<i>By " + recipe.author.displayName + "</i>"
+    ),
+    recipeAuthor2 = $("<p></p>").html(
+      "<i>By " + recipe.author.displayName + "</i>"
+    );
+
   // completed card content
   let recipeContent = $("<div></div>")
     .addClass("card-content")
-    .append(recipeTitle);
+    .append(recipeTitle)
+    .append(recipeAuthor);
 
   // card action
   let recipeLink = $("<div></div>")
     .addClass("card-action")
     .append(
       $("<a></a>")
-        .attr("href", "recipes/" + recipe._id)
+        .attr("href", "/recipes/" + recipe._id)
         .text("Open recipe")
     );
 
@@ -54,6 +62,7 @@ function buildRecipeCard(recipe, container) {
         .addClass("card-title activator grey-text text-darken-4")
         .html(recipe.name + '<i class="material-icons right">close</i>')
     )
+    .append(recipeAuthor2)
     .append(recipeSummary);
 
   // completed card
@@ -73,9 +82,20 @@ function buildRecipeCard(recipe, container) {
     .appendTo(recipeContainer);
 }
 
+// redirect the UI to 'path'
+function redirect(path) {
+  window.setTimeout(() => {
+    showPreload();
+    window.setTimeout(() => {
+      window.location = path;
+    }, 1000);
+  }, 1000);
+}
+
 $(document).ready(() => {
   // init components
   $(".sidenav").sidenav();
+  //$(".materialboxed").materialbox();
 
   $("#new-recipe-btn, #edit-recipe-btn")
     .parent()

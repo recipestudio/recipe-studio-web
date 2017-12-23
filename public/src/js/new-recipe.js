@@ -27,6 +27,43 @@ function buildIngredientAutocompleteData() {
   });
 }
 
+// image uploading function
+function uploadImage(img) {
+  console.log("starting upload");
+
+  let requestData = new FormData();
+  requestData.append("image", img);
+  requestData.append("type", "file");
+
+  // show preloader
+  $(".file.progress").show();
+
+  $.ajax({
+    url: "https://api.imgur.com/3/image",
+    type: "POST",
+    data: requestData,
+    contentType: false,
+    processData: false,
+    headers: {
+      Authorization: "Client-ID eaefba0e049bc17"
+    }
+  })
+    .then(result => {
+      console.log(
+        "Image uploaded: http://i.imgur.com/" + result.data.id + ".png"
+      );
+
+      // hide preloader
+      $(".file.progress").hide();
+      $(".recipe-image-uploader").hide();
+
+      let recipeImage = "http://i.imgur.com/" + result.data.id + ".png";
+      $(".recipe-image img").attr("src", recipeImage);
+      $(".recipe-image").show();
+    })
+    .catch(err => console.error(err));
+}
+
 // add ingredient to recipe
 function addIngredient() {
   // get ingredient properties
@@ -42,22 +79,28 @@ function addIngredient() {
       url: APIurl + "ingredient/new",
       type: "POST",
       data: { name: iname },
-      success: () => {
-        buildAutocompleteData();
+      success: data => {
+        buildIngredientAutocompleteData();
+        let iid = data._id;
+        appendIngredientToCollection(iid, iname, iqty, iunits);
       },
       error: res => {
         console.error(res);
       }
     });
+  } else {
+    appendIngredientToCollection(iid, iname, iqty, iunits);
   }
+}
 
+function appendIngredientToCollection(id, name, qty, units) {
   // build new elements
   let newLi = $("<li></li>")
     .addClass("collection-item")
-    .attr("data-id", iid)
-    .attr("data-qty", iqty)
-    .attr("data-units", iunits)
-    .text(iname + ", " + iqty + " " + iunits);
+    .attr("data-id", id)
+    .attr("data-qty", qty)
+    .attr("data-units", units)
+    .text(name + ", " + qty + " " + units);
 
   let closeBtn = $("<a></a>")
     .addClass("btn-flat waves-effect remove-ingredient right")
@@ -71,6 +114,12 @@ function addIngredient() {
   // add elements to DOM
   newLi.append(closeBtn);
   $("ul.ingredients-container").append(newLi);
+
+  // clear ingredient fields
+  $("#ingredients-selector").val("");
+  $("#ingredient-id").val("");
+  $("#ingredient-quantity").val("");
+  $("#ingredient-units").val("");
 }
 
 // save new recipe
@@ -79,6 +128,10 @@ function saveNewRecipe() {
     recipe_directions = $("#directions").val(),
     recipe_description = $("#description").val(),
     recipe_author = "eBsgGdpjjuXDVEghGwLRVSoJzqm2";
+
+  if ($(".recipe-image img").attr("src")) {
+    recipe_image = $(".recipe-image img").attr("src");
+  }
 
   let recipe_ingredients = [];
   $("ul.ingredients-container")
@@ -104,7 +157,9 @@ function saveNewRecipe() {
     name: recipe_name,
     directions: recipe_directions,
     ingredients: recipe_ingredients,
-    author: recipe_author
+    author: recipe_author,
+    description: recipe_description,
+    image: recipe_image
   };
 
   console.log("sending data: ", recipe_obj);
@@ -126,11 +181,25 @@ $(document).ready(() => {
   // save recipe handler
   $("#new-recipe-save").click(saveNewRecipe);
 
+  // upload image handler
+  $("#upload").click(() => {
+    // check if file is uploaded
+    let filesUploaded = $("#image").prop("files");
+    if (filesUploaded.length > 0) {
+      uploadImage(filesUploaded[0]);
+    } else {
+      console.error("no files chosen");
+      swal("No file was selected!");
+    }
+  });
+
   // build ingredient autocomplete
   buildIngredientAutocompleteData();
 });
 
 function handleSaveSuccess(result) {
+  let rid = result._id;
+  redirect("/recipes/" + rid);
   console.info(result);
 }
 
