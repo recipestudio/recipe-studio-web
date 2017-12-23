@@ -79,22 +79,28 @@ function addIngredient() {
       url: APIurl + "ingredient/new",
       type: "POST",
       data: { name: iname },
-      success: () => {
-        buildAutocompleteData();
+      success: data => {
+        buildIngredientAutocompleteData();
+        let iid = data._id;
+        appendIngredientToCollection(iid, iname, iqty, iunits);
       },
       error: res => {
         console.error(res);
       }
     });
+  } else {
+    appendIngredientToCollection(iid, iname, iqty, iunits);
   }
+}
 
+function appendIngredientToCollection(id, name, qty, units) {
   // build new elements
   let newLi = $("<li></li>")
     .addClass("collection-item")
-    .attr("data-id", iid)
-    .attr("data-qty", iqty)
-    .attr("data-units", iunits)
-    .text(iname + ", " + iqty + " " + iunits);
+    .attr("data-id", id)
+    .attr("data-qty", qty)
+    .attr("data-units", units)
+    .text(name + ", " + qty + " " + units);
 
   let closeBtn = $("<a></a>")
     .addClass("btn-flat waves-effect remove-ingredient right")
@@ -108,6 +114,12 @@ function addIngredient() {
   // add elements to DOM
   newLi.append(closeBtn);
   $("ul.ingredients-container").append(newLi);
+
+  // clear ingredient fields
+  $("#ingredients-selector").val("");
+  $("#ingredient-id").val("");
+  $("#ingredient-quantity").val("");
+  $("#ingredient-units").val("");
 }
 
 // save new recipe
@@ -116,6 +128,10 @@ function saveNewRecipe() {
     recipe_directions = $("#directions").val(),
     recipe_description = $("#description").val(),
     recipe_author = "eBsgGdpjjuXDVEghGwLRVSoJzqm2";
+
+  if ($(".recipe-image img").attr("src")) {
+    recipe_image = $(".recipe-image img").attr("src");
+  }
 
   let recipe_ingredients = [];
   $("ul.ingredients-container")
@@ -141,7 +157,9 @@ function saveNewRecipe() {
     name: recipe_name,
     directions: recipe_directions,
     ingredients: recipe_ingredients,
-    author: recipe_author
+    author: recipe_author,
+    description: recipe_description,
+    image: recipe_image
   };
 
   console.log("sending data: ", recipe_obj);

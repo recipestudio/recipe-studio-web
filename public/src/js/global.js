@@ -39,7 +39,7 @@ function buildRecipeCard(recipe, container) {
     .addClass("card-action")
     .append(
       $("<a></a>")
-        .attr("href", "recipes/" + recipe._id)
+        .attr("href", "/recipes/" + recipe._id)
         .text("Open recipe")
     );
 
