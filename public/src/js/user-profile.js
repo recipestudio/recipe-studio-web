@@ -4,7 +4,7 @@ function loadUserDetails(userId) {
     // load user details
     .then(user => {
       $(".user-name").text(user.displayName);
-      let d = new Date(user.metadata.creationTime);
+      let d = new Date(user.creationTime);
       let d_string = d.toLocaleString("en-us", {
         month: "long",
         day: "numeric",
@@ -27,7 +27,7 @@ function loadUserDetails(userId) {
 }
 
 function loadUserRecipes(userId) {
-  $.getJSON(APIurl + "recipe/all?user=" + userId)
+  $.getJSON(APIurl + "recipe/search?user=" + userId)
     .then(recipes => {
       // build recipes and append to page
       recipes.forEach(recipe => {

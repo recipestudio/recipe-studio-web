@@ -122,12 +122,23 @@ function saveNewRecipe() {
   let recipe_name = $("#name").val(),
     recipe_directions = $("#directions").val(),
     recipe_description = $("#description").val(),
-    recipe_author = "eBsgGdpjjuXDVEghGwLRVSoJzqm2";
+    recipe_author = firebase.auth().currentUser.uid;
 
+  // init obj
+  let recipe_obj = {};
+
+  // description / directions / name / author
+  recipe_obj.description = recipe_description;
+  recipe_obj.directions = recipe_directions;
+  recipe_obj.name = recipe_name;
+  recipe_obj.author = recipe_author;
+
+  // image
   if ($(".recipe-image img").attr("src")) {
-    recipe_image = $(".recipe-image img").attr("src");
+    recipe_obj.image = $(".recipe-image img").attr("src");
   }
 
+  // ingredients
   let recipe_ingredients = [];
   $("ul.ingredients-container")
     .children()
@@ -148,14 +159,9 @@ function saveNewRecipe() {
       });
     });
 
-  let recipe_obj = {
-    name: recipe_name,
-    directions: recipe_directions,
-    ingredients: recipe_ingredients,
-    author: recipe_author,
-    description: recipe_description,
-    image: recipe_image
-  };
+  if (recipe_ingredients.length > 0) {
+    recipe_obj.ingredients = recipe_ingredients;
+  }
 
   $.ajax({
     type: "POST",
