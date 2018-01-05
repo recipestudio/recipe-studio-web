@@ -4,16 +4,20 @@ nav
         a.sidenav-trigger(data-target="sidenav")
             i.material-icons menu
         ul.right.hide-on-med-and-down.sidenav-actions
-            li.signin-btn
-                a( href="/login" ) Log In
+            li.login-btn
+                a(href="/login") Log In
+            li.signup-btn
+                a(href="/signup") Sign Up
             li.account-btn 
                 a(href="/user") Account
             li.signout-btn
-                a( onclick="logout()" ) Log Out
+                a(onclick="logout()") Log Out
         ul.sidenav.sidenav-actions(id="sidenav")
-            li.signin-btn
-                a( href="/login" ) Log In
+            li.login-btn
+                a(href="/login") Log In
+            li.signup-btn
+                a(href="/signup") Sign Up
             li.account-btn 
                 a(href="/account") Account
             li.signout-btn
-                a( onclick="logout()" ) Log Out
+                a(onclick="logout()") Log Out
