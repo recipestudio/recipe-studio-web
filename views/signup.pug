@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    main
+        .container
+            .row
+                .col.s12.center-align
+                    h4 Sign Up
+                    p Enter your personal details below to create a new account.
+            .row
+                .col.s12.m8.offset-m2
+                    .form
+                        .row
+                            .input-field.col.s12
+                                input.validate(type="text", id="user-name", required="true")
+                                label.active(for="user-name-first") Display Name
+                            .input-field.col.s12
+                                input.validate(type="email", id="user-email", required="true")
+                                label.active(for="user-email") Email
+                            .input-field.col.s12
+                                input.validate(type="password", id="user-pass", required="true")
+                                label.active(for="user-pass") Password
+                            .input-field.col.s12
+                                input.validate(type="password", id="user-pass-confirm", required="true")
+                                label.active(for="user-pass-confirm") Confirm Password
+                        .row
+                            .col.s12.center-align
+                                a.waves-effect.waves-light.btn.login-form-btn Sign Up
