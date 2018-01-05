@@ -12,17 +12,19 @@ block content
                     .signup.form
                         .row
                             .input-field.col.s12
-                                input.validate(type="text", id="user-name", required="true")
+                                input.validate(type="text", id="username", required="true")
                                 label.active(for="user-name") Display Name
                             .input-field.col.s12
-                                input.validate(type="email", id="user-email", required="true")
-                                label.active(for="user-email") Email
+                                input.validate(type="email", id="email", required="true")
+                                label.active(for="email") Email
+                                span.helper-text(data-error="Please enter a valid email")
                             .input-field.col.s12
-                                input.validate(type="password", id="user-pass", required="true")
-                                label.active(for="user-pass") Password
+                                input.validate(type="password", id="password", required="true")
+                                label.active(for="password") Password
                             .input-field.col.s12
-                                input.validate(type="password", id="user-pass-confirm", required="true")
-                                label.active(for="user-pass-confirm") Confirm Password
+                                input.validate(type="password", id="password-confirm", required="true")
+                                label.active(for="password-confirm") Confirm Password
+                                span.helper-text.conf-pass(data-error="Passwords do not match")
                         .row
                             .col.s12.center-align
                                 a.waves-effect.waves-light.btn.disabled.signup-form-btn Sign Up

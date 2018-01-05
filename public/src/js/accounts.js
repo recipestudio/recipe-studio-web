@@ -20,8 +20,12 @@ function login(email, password) {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(result => {
-      console.info("Logged in successfully!");
-      window.location = "/";
+      if (!result.emailVerified) {
+        redirect("/verify");
+      } else {
+        console.info("Logged in successfully!");
+        redirect("/");
+      }
     })
     .catch(error => {
       console.error(error.code, error.message);
@@ -42,11 +46,64 @@ function logout() {
     .signOut()
     .then(() => {
       console.info("Sign-out successful.");
-      window.location = "/logout";
+      window.location = "/";
     })
     .catch(error => {
       console.error(error.code, error.message);
     });
+}
+
+// create new account
+function createAccount(userDetails) {
+  return new Promise((resolve, reject) => {
+    if (
+      !userDetails.email ||
+      !userDetails.password ||
+      !userDetails.displayName
+    ) {
+      console.error("User details missing");
+      reject("User details missing");
+    } else if (
+      !checkPasswords(userDetails.password, userDetails.confirmPassword)
+    ) {
+      reject("Passwords don't match");
+    } else {
+      let newUser = {
+        email: userDetails.email,
+        password: userDetails.password,
+        name: userDetails.displayName
+      };
+      console.log("creating user...", newUser);
+
+      // create user, send verification
+      $.ajax({
+        url: APIurl + "user/new",
+        type: "POST",
+        data: newUser
+      })
+        .then(result => {
+          console.log(result);
+          return result;
+        })
+        .catch(err => {
+          console.error(err);
+          reject(err);
+        });
+    }
+  });
+}
+
+// check passwords are the same
+function checkPasswords(p1, p2) {
+  if (p1 === p2) {
+    $(".conf-pass.helper-text").hide();
+    $('input[type = "password"]').removeClass("invalid");
+    return true;
+  } else {
+    $(".conf-pass.helper-text").show();
+    $('input[type = "password"]').addClass("invalid");
+    return false;
+  }
 }
 
 // update UI when user logs in/out
@@ -57,7 +114,8 @@ function updateUserDetailsUI(user) {
     $(".user-greeting").show(); */
 
     // login/out button
-    $(".signin-btn").hide();
+    $(".login-btn").hide();
+    $(".signup-btn").hide();
     $(".signout-btn").show();
     $(".account-btn")
       .show()
@@ -73,7 +131,8 @@ function updateUserDetailsUI(user) {
     $(".user-greeting").hide();
 
     // login/out button
-    $(".signin-btn").show();
+    $(".login-btn").show();
+    $(".signup-btn").show();
     $(".signout-btn").hide();
     $(".account-btn")
       .hide()
@@ -90,6 +149,17 @@ function updateUserDetailsUI(user) {
   }
 }
 
+function verifyEmail() {
+  if (isLoggedIn) {
+    firebase.auth().currentUser.sendEmailVerification();
+  } else {
+    console.error("User not logged in");
+    M.Toast({
+      html: "Looks like you're not logged in. Log in to verify your account."
+    });
+  }
+}
+
 $(document).ready(() => {
   // listen for authentication changes
   firebase.auth().onAuthStateChanged(user => {
@@ -100,6 +170,7 @@ $(document).ready(() => {
   // check authentication and initialize account UI
   updateUserDetailsUI(isLoggedIn ? firebase.auth().user : null);
 
+  // login click event
   let loginFormBtn = $(".login-form-btn");
   if (loginFormBtn.length > 0) {
     loginFormBtn.click(() => {
@@ -108,5 +179,61 @@ $(document).ready(() => {
 
       login(userEmail, userPass);
     });
+  }
+
+  // listen for form changes to validate signup
+  let signUpInputs = $(".signup input");
+  if (signUpInputs.length > 0) {
+    signUpInputs.blur(() => {
+      let p1 = $("#password").val(),
+        p2 = $("#password-confirm").val(),
+        i = $(".invalid").length;
+      if (checkPasswords(p1, p2) && i == 0) {
+        $(".signup-form-btn").removeClass("disabled");
+      } else {
+        $(".signup-form-btn").addClass("disabled");
+      }
+    });
+  }
+
+  // signup click event
+  let signUpBtn = $(".signup-form-btn");
+  if (signUpBtn.length > 0) {
+    signUpBtn.click(() => {
+      let newUser = {
+        email: $("#email").val(),
+        password: $("#password").val(),
+        confirmPassword: $("#password-confirm").val(),
+        displayName: $("#username").val()
+      };
+
+      createAccount(newUser)
+        .then(() => {
+          redirect("/verify");
+        })
+        .catch(err => {
+          M.toast({
+            html:
+              "There was a problem creating your account. Please try again later."
+          });
+        });
+    });
+  }
+
+  // verifyEmail handler
+  $("#verifyEmail").click(() => {
+    verifyEmail();
+  });
+
+  if (window.location.href.includes("/verify")) {
+    if (isLoggedIn) {
+      if (firebase.auth().currentUser.emailVerified) {
+        redirect("/");
+      } else {
+        console.log("a");
+      }
+    } else {
+      console.log("b");
+    }
   }
 });
