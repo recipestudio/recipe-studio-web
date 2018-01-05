@@ -15,8 +15,15 @@ function loadRecipe(rid) {
       $(".recipe-author").text(recipe.author.displayName);
       $(".recipe-author-id").attr("data-author-id", recipe.author.uid);
       $(".recipe-author-link").attr("href", "/user/" + recipe.author.uid);
-      $(".recipe-description").text(recipe.description);
-      $(".recipe-directions").text(recipe.directions);
+
+      // replace newline chars with <br> tags
+      recipeDescription = recipe.description.replace(
+        /(?:\r\n|\r|\n)/g,
+        "<br />"
+      );
+      recipeDirections = recipe.directions.replace(/(?:\r\n|\r|\n)/g, "<br />");
+      $(".recipe-description").html(recipeDescription);
+      $(".recipe-directions").html(recipeDirections);
 
       let d = new Date(recipe.created);
       let d_string = d.toLocaleString("en-us", {
