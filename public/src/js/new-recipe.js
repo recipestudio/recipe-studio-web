@@ -1,3 +1,6 @@
+const ingredients = {};
+const categories = [];
+
 function buildIngredientAutocompleteData() {
   let ingredientsAutocomplete = {};
 
@@ -7,10 +10,17 @@ function buildIngredientAutocompleteData() {
         ingredients[i.name] = i._id;
       }
 
+      // build categories
+      if (!categories.includes(i.category)) {
+        categories.push(i.category);
+      }
+
       if (!ingredientsAutocomplete[i.name]) {
         ingredientsAutocomplete[i.name] = null;
       }
     });
+
+    categories.sort();
 
     $("#ingredients-selector").autocomplete({
       data: ingredientsAutocomplete
@@ -22,7 +32,7 @@ function buildIngredientAutocompleteData() {
     if (ingredients[newVal]) {
       $("#ingredient-id").val(ingredients[newVal]);
     } else {
-      console.error("No ingredient ID found for: " + newVal);
+      //console.error("No ingredient ID found for: " + newVal);
     }
   });
 }
@@ -69,23 +79,57 @@ function addIngredient() {
     iunits = $("#ingredient-units").val();
 
   if (iid == "" || !iid) {
-    // create new ingredient
-    $.ajax({
-      url: APIurl + "ingredient/new",
-      type: "POST",
-      data: { name: iname },
-      success: data => {
-        buildIngredientAutocompleteData();
-        let iid = data._id;
-        appendIngredientToCollection(iid, iname, iqty, iunits);
+    // prompt for ingredient category before sending to API
+    let categorySelector = $("<select></select>");
+
+    categories.forEach(category => {
+      let newCategory = $("<option></option>")
+        .text(category)
+        .attr("value", category);
+
+      categorySelector.append(newCategory);
+    });
+
+    // show modal to select category
+    swal({
+      content: {
+        element: categorySelector[0]
       },
-      error: res => {
-        console.error(res);
+      buttons: ["Cancel", "Save"]
+    }).then(selection => {
+      console.log(selection);
+      switch (selection) {
+        case true:
+          let icategory = categorySelector.val();
+          data = { name: iname, category: icategory };
+          postIngredient(data, iqty, iunits);
+          break;
+
+        case false:
+          break;
       }
     });
   } else {
     appendIngredientToCollection(iid, iname, iqty, iunits);
   }
+}
+
+function postIngredient(ingredient, qty, units) {
+  // create new ingredient
+  $.ajax({
+    url: APIurl + "ingredient/new",
+    type: "POST",
+    data: ingredient,
+    success: data => {
+      buildIngredientAutocompleteData();
+      let iid = data._id,
+        iname = data.name;
+      appendIngredientToCollection(iid, iname, qty, units);
+    },
+    error: res => {
+      console.error(res);
+    }
+  });
 }
 
 function appendIngredientToCollection(id, name, qty, units) {
