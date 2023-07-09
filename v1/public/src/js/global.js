@@ -1,4 +1,4 @@
-const APIurl = "https://api.recipe.studio/";
+const APIurl = "http://localhost:8000/";
 
 function showPreload() {
   $(".preloader-wrapper").show();

@@ -60,3 +60,4 @@ Procfile
 package-lock.json
 .jshintrc
 .eslintrc.js
+*.DS_Store
