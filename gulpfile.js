@@ -1,13 +1,13 @@
-var gulp = require('gulp'),
-    rename = require('gulp-rename'),
-    autoprefixer = require('gulp-autoprefixer'),
-    concat = require('gulp-concat'),
-    jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),
-    cleancss = require('gulp-clean-css'),
-    sass = require('gulp-sass'),
-    babel = require('gulp-babel'),
-    sourcemaps = require('gulp-sourcemaps');
+var gulp = require('gulp');
+var rename = require('gulp-rename');
+var autoprefixer = require('gulp-autoprefixer');
+var concat = require('gulp-concat');
+// var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
+var cleancss = require('gulp-clean-css');
+var sass = require('gulp-sass')(require('sass'));
+var babel = require('gulp-babel');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('styles', function(){
   gulp.src(['node_modules/materialize-css/dist/css/materialize.css', 'public/src/css/*css'])
