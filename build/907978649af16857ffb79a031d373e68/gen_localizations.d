@@ -1,0 +1,1 @@
+ /Users/harrison/projects/recipe-studio-web/.dart_tool/flutter_gen/gen_l10n/app_localizations_en.dart /Users/harrison/projects/recipe-studio-web/.dart_tool/flutter_gen/gen_l10n/app_localizations.dart:  /Users/harrison/projects/recipe-studio-web/l10n.yaml /Users/harrison/projects/recipe-studio-web/lib/src/localization/app_en.arb
