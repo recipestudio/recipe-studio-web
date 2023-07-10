@@ -61,3 +61,8 @@ package-lock.json
 .jshintrc
 .eslintrc.js
 *.DS_Store
+
+# Dart
+.dart_tool/
+build/
+.idea/
